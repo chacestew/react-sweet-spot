@@ -4,12 +4,12 @@
   "description": "Skeleton for a modern React frontend application and server with great developer utility.",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon --watch ./index.js index.js",
-    "client": "rimraf dist && NODE_ENV=production webpack --progress --config webpack/client.prod.js",
-    "server": "rimraf build/server.js && NODE_ENV=production webpack --progress --config webpack/server.prod.js",
+    "start": "cross-env NODE_ENV=development nodemon --watch ./index.js index.js",
+    "client": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config webpack/client.prod.js",
+    "server": "rimraf build/server.js && cross-env NODE_ENV=production webpack --progress --config webpack/server.prod.js",
     "build": "npm run client && npm run server",
-    "serve": "NODE_ENV=production node index.js",
-    "analyze": "NODE_ENV=production webpack --profile --json > stats.json --config webpack/client.prod.js && webpack-bundle-analyzer stats.json"
+    "serve": "cross-env NODE_ENV=production node index.js",
+    "analyze": "cross-env NODE_ENV=production webpack --profile --json > stats.json --config webpack/client.prod.js && webpack-bundle-analyzer stats.json"
   },
   "keywords": [
     "react",
@@ -26,6 +26,7 @@
   "dependencies": {
     "@loadable/component": "^5.2.2",
     "@loadable/server": "^5.2.2",
+    "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "express-no-favicons": "0.0.1",
     "express-static-gzip": "^1.1.3",
