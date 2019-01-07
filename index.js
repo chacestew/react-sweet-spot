@@ -1,8 +1,13 @@
+/* eslint-disable global-require, import/no-unresolved */
 const express = require('express');
 const ignoreFavicon = require('express-no-favicons');
 
 const app = express();
 app.use(ignoreFavicon());
+app.use('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nDisallow:');
+});
 
 const start = () => {
   const mode = process.env.NODE_ENV;
@@ -13,7 +18,6 @@ const start = () => {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  /* eslint-disable global-require */
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -21,7 +25,6 @@ if (process.env.NODE_ENV === 'development') {
   const clientConfig = require('./webpack/client.dev');
   const serverConfig = require('./webpack/server.dev');
   const compiler = webpack([clientConfig, serverConfig]);
-  /* eslint-enable */
 
   const webpackDevServer = webpackDevMiddleware(compiler, {
     serverSideRender: true,
@@ -40,11 +43,9 @@ if (process.env.NODE_ENV === 'development') {
 
   webpackDevServer.waitUntilValid(start);
 } else {
-  /* eslint-disable global-require, import/no-unresolved */
   const expressStaticGzip = require('express-static-gzip');
   const render = require('./build/server').default;
   const clientStats = require('./build/stats.json');
-  /* eslint-enable */
 
   app.use(
     '/public',
