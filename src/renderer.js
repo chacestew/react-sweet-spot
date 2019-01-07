@@ -22,16 +22,18 @@ export default ({ clientStats }) => (req, res) => {
   const styleTags = styles.getStyleTags();
   const scriptTags = chunks.getScriptTags();
 
-  res.send(`<!doctype html>
-    <html>
-    <head>
-        <title>App</title>
-        ${styleTags}
-    </head>
-    <body>
-        <div id="root">${html}</div>
-        ${scriptTags}
-    </body>
-    </html>
-`);
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Skeleton for a modern React frontend application and server with great developer utility.">
+    <title>React Sweet Spot</title>
+    ${styleTags}
+  </head>
+  <body>
+    <div id="root">${html}</div>
+    ${scriptTags}
+  </body>
+</html>`);
 };
