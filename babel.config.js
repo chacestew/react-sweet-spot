@@ -1,15 +1,12 @@
-const isNodeTarget = caller => caller.target === 'node';
-
 module.exports = api => {
-  const isNode = api.caller(isNodeTarget);
+  api.cache(true);
 
   const presets = [
     '@babel/preset-react',
     [
       '@babel/preset-env',
       {
-        targets: isNode ? { node: 'current' } : undefined,
-        useBuiltIns: !isNode ? 'usage' : undefined,
+        useBuiltIns: 'usage',
       },
     ],
   ];
@@ -25,7 +22,6 @@ module.exports = api => {
         pure: true,
       },
     ],
-    '@loadable/babel-plugin',
   ];
 
   return {

@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const LoadablePlugin = require('@loadable/webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { paths, loaders } = require('./helpers');
 
 module.exports = {
@@ -15,5 +15,8 @@ module.exports = {
   module: {
     rules: [loaders.JS({ cacheDirectory: true }), loaders.Images()],
   },
-  plugins: [new LoadablePlugin(), new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({ title: 'React Sweet Spot', template: 'index.html' }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };

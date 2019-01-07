@@ -1,5 +1,4 @@
-const webpack = require('webpack');
-const LoadablePlugin = require('@loadable/webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const { paths, loaders } = require('./helpers');
@@ -28,8 +27,7 @@ module.exports = {
     rules: [loaders.JS(), loaders.Images()],
   },
   plugins: [
-    new webpack.HashedModuleIdsPlugin(),
-    new LoadablePlugin({ filename: '../build/stats.json', writeToDisk: true }),
+    new HtmlWebpackPlugin({ title: 'React Sweet Spot', template: 'index.html' }),
     new CompressionPlugin({
       test: /\.(js|css)$/,
     }),

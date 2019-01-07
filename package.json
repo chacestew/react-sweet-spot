@@ -5,18 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon --watch ./index.js index.js",
-    "client": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config webpack/client.prod.js",
-    "server": "rimraf build/server.js && cross-env NODE_ENV=production webpack --progress --config webpack/server.prod.js",
-    "build": "npm run client && npm run server",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config webpack/config.prod.js",
     "serve": "cross-env NODE_ENV=production node index.js",
-    "analyze": "cross-env NODE_ENV=production webpack --profile --json > stats.json --config webpack/client.prod.js && webpack-bundle-analyzer stats.json"
+    "analyze": "cross-env NODE_ENV=production webpack --profile --json > stats.json --config webpack/config.prod.js && webpack-bundle-analyzer stats.json"
   },
   "keywords": [
     "react",
     "webpack",
     "webpack 4",
-    "universal",
-    "server side rendering",
     "code splitting",
     "babel",
     "babel 7"
@@ -25,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@loadable/component": "^5.2.2",
-    "@loadable/server": "^5.2.2",
+    "connect-history-api-fallback": "^1.5.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "express-no-favicons": "0.0.1",
@@ -48,8 +44,6 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@loadable/babel-plugin": "^5.2.2",
-    "@loadable/webpack-plugin": "^5.2.2",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.10.0",
@@ -63,13 +57,12 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.0",
     "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.2",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-hot-middleware": "^2.24.3",
-    "webpack-hot-server-middleware": "^0.5.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-hot-middleware": "^2.24.3"
   }
 }

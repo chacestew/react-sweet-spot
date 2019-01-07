@@ -1,3 +1,5 @@
+Note: This is the simplified client-rendering (SPA) branch. For the full universal branch, checkout [master](https://github.com/chacestew/react-sweet-spot).
+
 ## React Sweet Spot
 
 Skeleton for a modern ([PWA to-do](#to-do)) React frontend applicaton and server with great developer utility. Hopefully up to date.

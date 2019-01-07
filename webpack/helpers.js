@@ -5,9 +5,7 @@ const resolvePath = p => path.resolve(currentDir, p);
 
 const paths = {
   client: resolvePath('src/client.js'),
-  renderer: resolvePath('src/renderer.js'),
   dist: resolvePath('dist'),
-  build: resolvePath('build'),
 };
 
 const loaders = {

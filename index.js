@@ -1,8 +1,11 @@
+/* eslint-disable global-require */
 const express = require('express');
 const ignoreFavicon = require('express-no-favicons');
+const history = require('connect-history-api-fallback');
 
 const app = express();
 app.use(ignoreFavicon());
+app.use(history({ index: '/public/index.html' }));
 
 const start = () => {
   const mode = process.env.NODE_ENV;
@@ -13,18 +16,13 @@ const start = () => {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  /* eslint-disable global-require */
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-  const clientConfig = require('./webpack/client.dev');
-  const serverConfig = require('./webpack/server.dev');
-  const compiler = webpack([clientConfig, serverConfig]);
-  /* eslint-enable */
+  const config = require('./webpack/config.dev');
+  const compiler = webpack(config);
 
   const webpackDevServer = webpackDevMiddleware(compiler, {
-    serverSideRender: true,
     overlay: true,
     hot: true,
     stats: {
@@ -32,19 +30,14 @@ if (process.env.NODE_ENV === 'development') {
       colors: true,
       timings: true,
     },
-    publicPath: clientConfig.output.publicPath,
+    publicPath: config.output.publicPath,
   });
   app.use(webpackDevServer);
-  app.use(webpackHotMiddleware(compiler.compilers[0]));
-  app.use(webpackHotServerMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler));
 
   webpackDevServer.waitUntilValid(start);
 } else {
-  /* eslint-disable global-require, import/no-unresolved */
   const expressStaticGzip = require('express-static-gzip');
-  const render = require('./build/server').default;
-  const clientStats = require('./build/stats.json');
-  /* eslint-enable */
 
   app.use(
     '/public',
@@ -54,6 +47,5 @@ if (process.env.NODE_ENV === 'development') {
       orderPreference: ['br'],
     })
   );
-  app.use(render({ clientStats }));
   start();
 }
