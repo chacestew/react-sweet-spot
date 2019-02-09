@@ -9,6 +9,7 @@ Skeleton for a modern ([PWA to-do](#to-do)) React frontend applicaton and server
 - Component code splitting ([@loadable/component](https://github.com/smooth-code/loadable-components/tree/master/packages/component))
 - CSS-in-JS ([styled-components](https://github.com/styled-components/styled-components))
 - Hot module reloading on client and server ([react-hot-loader](https://github.com/gaearon/react-hot-loader) and [webpack-hot-server-middleware](https://github.com/60frames/webpack-hot-server-middleware))
+- Document head manager ([react-helmet](https://github.com/nfl/react-helmet))
 
 ### Setup
 

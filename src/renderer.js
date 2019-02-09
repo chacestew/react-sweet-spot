@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 import { ChunkExtractor } from '@loadable/server';
+import { Helmet } from 'react-helmet';
 import App from './App/App';
 
 export default ({ clientStats }) => (req, res) => {
@@ -19,19 +20,21 @@ export default ({ clientStats }) => (req, res) => {
       )
     )
   );
+  const helmet = Helmet.renderStatic();
   const styleTags = styles.getStyleTags();
   const scriptTags = chunks.getScriptTags();
 
   res.send(`<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ${helmet.htmlAttributes.toString()}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Skeleton for a modern React frontend application and server with great developer utility.">
-    <title>React Sweet Spot</title>
+    ${helmet.title.toString()}
+    ${helmet.meta.toString()}
+    ${helmet.link.toString()}
     ${styleTags}
   </head>
-  <body>
+  <body ${helmet.bodyAttributes.toString()}>
     <div id="root">${html}</div>
     ${scriptTags}
   </body>
