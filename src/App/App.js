@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import { createGlobalStyle } from 'styled-components';
 import styledNormalize from 'styled-normalize';
+import { Helmet } from 'react-helmet';
 
 import TopNav from './Common/TopNav';
 import Main from './Common/Main';
@@ -28,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => (
   <>
+    <Helmet defaultTitle="Home" titleTemplate="%s - React Sweet Spot" />
     <GlobalStyle />
     <header>
       <TopNav />
