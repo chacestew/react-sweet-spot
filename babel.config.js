@@ -10,6 +10,7 @@ module.exports = api => {
       {
         targets: isNode ? { node: 'current' } : undefined,
         useBuiltIns: !isNode ? 'usage' : undefined,
+        corejs: 3
       },
     ],
   ];
