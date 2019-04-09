@@ -13,7 +13,7 @@ module.exports = {
     publicPath: '/public/',
   },
   module: {
-    rules: [loaders.JS({ cacheDirectory: true }), loaders.Images()],
+    rules: [loaders.RHL(), loaders.JS({ cacheDirectory: true }), loaders.Images()],
   },
   plugins: [
     new HtmlWebpackPlugin({ title: 'React Sweet Spot', template: 'index.html' }),
