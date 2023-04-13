@@ -1,3 +1,5 @@
+### 13-04-2023: This is definitely not the sweet spot now - but a time capsule.
+
 ## React Sweet Spot
 
 Skeleton for a modern ([PWA to-do](#to-do)) React frontend applicaton and server with great developer utility. Hopefully up to date.
